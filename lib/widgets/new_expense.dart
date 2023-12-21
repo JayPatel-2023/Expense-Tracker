@@ -94,7 +94,7 @@ class _NewExpenseState extends State<NewExpense> {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 8),
               Expanded(
                 child: Row(
                   mainAxisAlignment:
