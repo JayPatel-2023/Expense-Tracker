@@ -26,8 +26,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-      isScrollControlled:
-          true, // it takes full screen size for creating new expense
+      isScrollControlled: true, // it takes full screen size for creating new expense
       context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
@@ -72,7 +71,9 @@ class _ExpensesState extends State<Expenses> {
     // Expenses are in list
     if (_registeredExpenses.isNotEmpty) {
       mainContent = ExpensesList(
-          expenses: _registeredExpenses, onRemoveExpense: _removeExpense);
+          expenses: _registeredExpenses, 
+          onRemoveExpense: _removeExpense
+        );
     }
 
     return Scaffold(
@@ -89,8 +90,9 @@ class _ExpensesState extends State<Expenses> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text('the chart'),
-          Expanded(child: mainContent // Condition for showing Expenses
-              ),
+          Expanded(
+            child: mainContent // Condition for showing Expenses
+          ),
         ],
       ),
     );
