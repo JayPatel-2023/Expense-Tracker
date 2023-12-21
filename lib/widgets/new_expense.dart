@@ -13,7 +13,6 @@ class _NewExpenseState extends State<NewExpense> {
   final _amountController = TextEditingController();
   Category _selectedCategory = Category.food;
   DateTime? _selectedDate;
- 
 
   void _presentDatePicker() async {
     final now = DateTime.now();
@@ -26,6 +25,31 @@ class _NewExpenseState extends State<NewExpense> {
     setState(() {
       _selectedDate = pickedDate;
     });
+  }
+
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Invalid input'),
+          content: const Text(
+              'please make sure a valid title, amount, date and category was entered.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Okay'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+    
   }
 
   @override
@@ -73,9 +97,9 @@ class _NewExpenseState extends State<NewExpense> {
                         ? 'No Date selected'
                         : formatter.format(_selectedDate!)),
                     IconButton(
-                        onPressed: _presentDatePicker,
-                        icon: const Icon(Icons.calendar_month),
-                      ),
+                      onPressed: _presentDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    ),
                   ],
                 ),
               )
@@ -113,10 +137,7 @@ class _NewExpenseState extends State<NewExpense> {
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(double.parse(_amountController.text));
-                },
+                onPressed: _submitExpenseData,
                 child: const Text('Save Expense'),
               ),
             ],
