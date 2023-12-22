@@ -10,8 +10,10 @@ void main() {
         useMaterial3: true,
         ).copyWith(
           colorScheme: kDarkColorScheme,
+          appBarTheme: darkAppbarTheme,
           cardTheme: darkCardTheme,
           elevatedButtonTheme: darkButtonTheme,
+          textTheme: darkTxtTheme,
       ),
       theme: ThemeData(
         useMaterial3: true
