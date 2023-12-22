@@ -24,3 +24,15 @@ final txtTheme = ThemeData().textTheme.copyWith(
     fontSize: 14,
   ),
 );
+
+final darkCardTheme = const CardTheme().copyWith(
+  color: kDarkColorScheme.secondaryContainer,
+  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+);
+
+final darkButtonTheme = ElevatedButtonThemeData(
+  style: ElevatedButton.styleFrom(
+    backgroundColor: kDarkColorScheme.primaryContainer,
+    foregroundColor: kDarkColorScheme.onPrimaryContainer,
+  ),
+);

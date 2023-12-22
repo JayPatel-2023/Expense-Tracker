@@ -6,15 +6,23 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     MaterialApp(
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
+        ).copyWith(
+          colorScheme: kDarkColorScheme,
+          cardTheme: darkCardTheme,
+          elevatedButtonTheme: darkButtonTheme,
+      ),
       theme: ThemeData(
         useMaterial3: true
-      ).copyWith(
+        ).copyWith(
           colorScheme: kColorScheme,
           appBarTheme: appbarTheme,
           cardTheme: cardTheme,
           elevatedButtonTheme: buttonTheme,
           textTheme: txtTheme,
-        ),
+      ),
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
         home: const Expenses(),
       )
