@@ -53,6 +53,7 @@ class ExpenseBucket {
   double get totalExpenses {
     double sum = 0;
 
+    // calculate total expense for particular category
     for (final expense in expenses) {
       sum += expense.amount;
     }
