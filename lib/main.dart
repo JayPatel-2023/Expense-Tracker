@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:expense_tracker/Pages/expenses.dart';
 import 'package:expense_tracker/utils/colors.dart';
 import 'package:expense_tracker/utils/styles.dart';
-import 'package:flutter/material.dart';
 
 void main() {
   runApp(

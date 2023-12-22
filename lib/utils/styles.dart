@@ -1,5 +1,6 @@
-import 'package:expense_tracker/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:expense_tracker/utils/colors.dart';
+
 
 // light mode themes
 final appbarTheme = const AppBarTheme().copyWith(
