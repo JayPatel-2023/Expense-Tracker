@@ -28,7 +28,8 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-      isScrollControlled: true, // it takes full screen size for creating new expense
+      isScrollControlled:
+          true, // it takes full screen size for creating new expense
       context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
@@ -41,13 +42,13 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void _removeExpense(Expense expense) {
-    
     final expenseIndex = _registeredExpenses.indexOf(expense);
     setState(() {
       _registeredExpenses.remove(expense);
     });
 
-    ScaffoldMessenger.of(context).clearSnackBars(); // For multiple deletaion remove previous message 
+    ScaffoldMessenger.of(context)
+        .clearSnackBars(); // For multiple deletaion remove previous message
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       // Show bottam message with recover option for deleted expense
       duration: const Duration(seconds: 3),
@@ -65,6 +66,8 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;  
+
     // No Expenses
     Widget mainContent = const Center(
       child: Text('No expenses found.Start adding some!'),
@@ -73,9 +76,7 @@ class _ExpensesState extends State<Expenses> {
     // Expenses are in list
     if (_registeredExpenses.isNotEmpty) {
       mainContent = ExpensesList(
-          expenses: _registeredExpenses, 
-          onRemoveExpense: _removeExpense
-        );
+          expenses: _registeredExpenses, onRemoveExpense: _removeExpense);
     }
 
     return Scaffold(
@@ -88,15 +89,20 @@ class _ExpensesState extends State<Expenses> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: mainContent // Condition for showing Expenses
-          ),
-        ],
-      ),
+      body: width < 600 
+      ? Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Chart(expenses: _registeredExpenses),
+            Expanded(child: mainContent), // Condition for showing Expenses
+          ],
+        ) 
+      : Row(
+          children: [
+            Expanded(child: Chart(expenses: _registeredExpenses)),
+            Expanded(child: mainContent), // Condition for showing Expenses
+          ], 
+        ),
     );
   }
 }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 
 import 'package:expense_tracker/Pages/expenses.dart';
 import 'package:expense_tracker/utils/colors.dart';
 import 'package:expense_tracker/utils/styles.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();    // orientation locking
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]).then((value) {
-    // The app only starts when the device orientation = portraitup
+  // WidgetsFlutterBinding.ensureInitialized();    // orientation locking
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  // ]).then((value) {
+  // The app only starts when the device orientation = portraitup
     runApp(MaterialApp(
       darkTheme: ThemeData.dark(
         useMaterial3: true,
@@ -32,5 +32,5 @@ void main() {
       debugShowCheckedModeBanner: false,
       home: const Expenses(),
     ));
-  });
+  // });
 }
