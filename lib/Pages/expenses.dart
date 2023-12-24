@@ -28,8 +28,8 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-      isScrollControlled:
-          true, // it takes full screen size for creating new expense
+      useSafeArea: true,        // stay away from the device features like camera
+      isScrollControlled: true, // it takes full screen size for creating new expense
       context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
