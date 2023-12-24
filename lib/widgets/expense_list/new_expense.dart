@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:expense_tracker/services/Models/expense.dart';
 
 class NewExpense extends StatefulWidget {
@@ -29,12 +32,23 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
-  void _submitExpenseData() {
-    final enteredAmount = double.tryParse(_amountController.text);
-    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
-    if (_titleController.text.trim().isEmpty ||
-        amountIsInvalid ||
-        _selectedDate == null) {
+  void _showDialog() {
+    if(Platform.isIOS){
+      showCupertinoDialog(
+        context: context,
+        builder: (ctx) => CupertinoAlertDialog(
+          title: const Text('Invalid input'),
+          content: const Text(
+              'please make sure a valid title, amount, date and category was entered.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Okay'),
+            ),
+          ],
+        ),
+      );
+    }else{
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -49,6 +63,16 @@ class _NewExpenseState extends State<NewExpense> {
           ],
         ),
       );
+    }
+  }
+
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      _showDialog();
       return;
     }
 
@@ -82,7 +106,7 @@ class _NewExpenseState extends State<NewExpense> {
             padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpace + 16),
             child: Column(
               children: [
-                if(width >= 600)
+                if (width >= 600)
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -116,7 +140,7 @@ class _NewExpenseState extends State<NewExpense> {
                       label: Text('Title'),
                     ),
                   ),
-                if(width >= 600)
+                if (width >= 600)
                   Row(
                     children: [
                       DropdownButton(
@@ -145,8 +169,8 @@ class _NewExpenseState extends State<NewExpense> {
                         child: Row(
                           mainAxisAlignment:
                               MainAxisAlignment.end, // for horizontal movement
-                          crossAxisAlignment:
-                              CrossAxisAlignment.center, // for vertical movement
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center, // for vertical movement
                           children: [
                             Text(_selectedDate == null
                                 ? 'No Date selected'
@@ -178,8 +202,8 @@ class _NewExpenseState extends State<NewExpense> {
                         child: Row(
                           mainAxisAlignment:
                               MainAxisAlignment.end, // for horizontal movement
-                          crossAxisAlignment:
-                              CrossAxisAlignment.center, // for vertical movement
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center, // for vertical movement
                           children: [
                             Text(_selectedDate == null
                                 ? 'No Date selected'
@@ -194,7 +218,7 @@ class _NewExpenseState extends State<NewExpense> {
                     ],
                   ),
                 const SizedBox(height: 16),
-                if(width >= 600)
+                if (width >= 600)
                   Row(
                     children: [
                       const Spacer(),
@@ -211,7 +235,7 @@ class _NewExpenseState extends State<NewExpense> {
                       ),
                     ],
                   )
-                else 
+                else
                   Row(
                     children: [
                       DropdownButton(
